@@ -7,6 +7,13 @@ Para começar, clone o repositório do projeto usando o Git. Execute o seguinte 
 ```bash
 git clone https://github.com/JuniorBeckerr/teste-joinads
 ```
+
+Acesse a pasta do projeto
+
+```bash
+cd teste-joinads
+```
+
 Rodando o Backend
 
 1. Acesse o diretório do backend
