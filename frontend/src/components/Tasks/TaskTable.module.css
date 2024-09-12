@@ -3,7 +3,7 @@
 }
 
 .tableWrapper {
-    overflow-x: auto; 
+    overflow-x: auto;
     max-height: calc(100vh - 200px);
 }
 
@@ -14,40 +14,35 @@
 }
 
 .customTable tbody tr {
-    background-color: #234546; 
-    color: white; 
-    text-align: start; 
+    background-color: #234546;
+    color: white;
+    text-align: start;
 }
 
 .customTable tbody tr:hover {
-    background-color: #2c4a57; 
+    background-color: #2c4a57;
 }
 
-.btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
+.completedRow {
+    background-color: #2c4a57;
 }
 
-.btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
+.completedText {
+    text-decoration: line-through;
+    color: #ccc;
 }
 
-td{
-    height: 50px;
+.descriptionColumn {
+    max-width: 800px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .tdButton {
     display: flex;
-    align-items: center; 
-    gap: 8px; 
-    justify-content: flex-end; 
-}
-
-.descriptionColumn {
-    max-width: 800px; 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    cursor: pointer;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
 }
