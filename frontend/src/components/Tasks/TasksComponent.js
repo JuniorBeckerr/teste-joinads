@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import TaskTable from "./TaskTable";
 import TaskModal from "../Layout/TaskModal";
 import ErrorPage from "../Error/pageError";
+import DeleteConfirmationModal from "../Layout/DeleteConfirmModal";
 
 const TasksComponent =  () => {
     const [tasks, setTasks] = useState([])
@@ -10,36 +11,28 @@ const TasksComponent =  () => {
     const [loading, setLoading] = useState(true)
     const [showModal, setShowModal] = useState(false)
     const [selectedTask, setSelectedTask] = useState(null)
- 
-    useEffect(() =>{
-        let isMounted = true;
+    const [taskToDelete, setTaskToDelete] = useState(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-            const fetchTask = async ()=>{
-                try{
-                const data = await getTasks();
-                if(isMounted){
-                    const result = data.data;
-                    setTasks(result)
-                }
-               
+    useEffect(() => {
+        const controller = new AbortController();
+        const fetchTask = async () => {
+            try {
+                const data = await getTasks({ signal: controller.signal });
+                setTasks(data.data);
+            } catch (error) {
+                if (controller.signal.aborted) return;
+                setError("Falha ao carregar as tarefas. Por favor, tente novamente.");
+                console.error("Erro ao buscar as tarefas:", error);
+            } finally {
+                setLoading(false);
             }
-            catch(error){
-                if (isMounted){
-                    setError("Falha ao carregar as tarefas. Por favor, tente novamente.");
-                    console.error("Erro ao buscar as tarefas:", error);
-                 }
-            }
-            finally {
-                if (isMounted) {
-                    setLoading(false);
-                }
-            }
-        }
-        fetchTask()
-        return()=>{
-            isMounted = false
-        }
-    }, [])
+        };
+        fetchTask();
+        return () => {
+            controller.abort();
+        };
+    }, []);
 
     const handleAddTask = () =>{
         setSelectedTask(null)
@@ -75,15 +68,22 @@ const TasksComponent =  () => {
     }, [tasks]);
 
 
-    const handleDeleteTask = async (taskId)=>{
-        try{
+    const handleDeleteTask = async (taskId) => {
+        try {
             await deleteTask(taskId);
-            setTasks(tasks.filter((task)=> task.id !== taskId))
-        }catch(error){
+            setTasks(tasks.filter((task) => task.id !== taskId));
+            setShowDeleteModal(false);
+            setTaskToDelete(null);
+        } catch (error) {
             setError("Falha ao excluir a tarefa. Por favor, tente novamente.");
             console.error("Erro ao excluir a tarefa:", error);
         }
-    }
+    };
+
+    const confirmDeleteTask = (taskId) => {
+        setTaskToDelete(taskId);
+        setShowDeleteModal(true);
+    };
 
     const handleCompleteTask = async (taskId) => {
         try {
@@ -118,13 +118,18 @@ const TasksComponent =  () => {
                 onAdd={handleAddTask}
                 onEdit={handleEditTask}
                 onComplete={handleCompleteTask}
-                onDelete={handleDeleteTask}
+                onDelete={confirmDeleteTask}
             />
             <TaskModal
                 show={showModal}
                 onClose={() => setShowModal(false)}
                 onSave={handleSaveTask}
                 task={selectedTask}
+            />
+            <DeleteConfirmationModal
+                show={showDeleteModal}
+                onClose={() => setShowDeleteModal(false)}
+                onConfirm={() => handleDeleteTask(taskToDelete)}
             />
         </>
     );
