@@ -58,18 +58,21 @@ mysql -u seu-usuario -p
 
 
 ```bash
-CREATE DATABASE nome_do_banco_de_dados;
+CREATE DATABASE test_joinads;
+
+exit
 ```
 3. Edite o arquivo .env para configurar as credenciais de acesso ao banco de dados, por exemplo:
 
 
-
+```bash
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=nome_do_banco_de_dados
+DB_DATABASE=test_joinads
 DB_USERNAME=seu-usuario
 DB_PASSWORD=sua-senha
+```
 
 6. Execute as migrações e seeds
 
