@@ -35,7 +35,7 @@ composer install
 Copie o arquivo de exemplo .env para criar seu próprio arquivo de configuração de ambiente:
 
 ```bash
-cp .env.example .env
+copy .env.example .env
 ```
 4. Gere a chave da aplicação
 
@@ -108,7 +108,7 @@ npm install
 3. Edite o arquivo .env para configurar as credenciais de acesso ao banco de dados, por exemplo:
 
 ```bash
-REACT_APP_API_URL=url do backend fornecidi pelo comando php artisan serve
+REACT_APP_API_URL=url do backend fornecido pelo comando php artisan serve
 ```
 
 4. Inicie o servidor de desenvolvimento
