@@ -104,7 +104,14 @@ Instale as dependências do projeto usando o NPM:
 ```bash
 npm install
 ```
-3. Inicie o servidor de desenvolvimento
+
+3. Edite o arquivo .env para configurar as credenciais de acesso ao banco de dados, por exemplo:
+
+```bash
+REACT_APP_API_URL=url do backend fornecodi pelo comando php artisan serve
+```
+
+4. Inicie o servidor de desenvolvimento
 
 Inicie o servidor de desenvolvimento do frontend:
 
