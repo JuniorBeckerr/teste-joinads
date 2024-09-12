@@ -69,7 +69,11 @@ const TasksComponent =  () => {
         }
     }
 
-    
+    useEffect(() => {
+        const inProgressTasks = tasks.filter(task => task.completed === 0).length;
+        document.title = `Você possui ${inProgressTasks} tarefas em andamento`;
+    }, [tasks]);
+
 
     const handleDeleteTask = async (taskId)=>{
         try{
@@ -99,8 +103,12 @@ const TasksComponent =  () => {
     if(error){
         return <ErrorPage message={error}/>;
     }
-    if(loading){
-        return <p>Carregando tarefas...</p>;
+    if(loading) {
+        return (
+            <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        )
     }
 
     return (
