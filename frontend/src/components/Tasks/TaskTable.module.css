@@ -1,0 +1,53 @@
+.customTable {
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(25,50,35,1) 35%, rgba(60,91,87,1) 77%);
+}
+
+.tableWrapper {
+    overflow-x: auto; 
+    max-height: calc(100vh - 200px);
+}
+
+.customTable thead th {
+    color: white;
+    text-align: start;
+    font-weight: bold;
+}
+
+.customTable tbody tr {
+    background-color: #234546; 
+    color: white; 
+    text-align: start; 
+}
+
+.customTable tbody tr:hover {
+    background-color: #2c4a57; 
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+td{
+    height: 50px;
+}
+
+.tdButton {
+    display: flex;
+    align-items: center; 
+    gap: 8px; 
+    justify-content: flex-end; 
+}
+
+.descriptionColumn {
+    max-width: 800px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    cursor: pointer;
+}
